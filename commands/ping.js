@@ -7,6 +7,8 @@ module.exports = {
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .setDescription('Respond with Pong'),
     async execute(interaction) {
+
+            
         await interaction.reply('pong!');
     }
 }

@@ -54,3 +54,4 @@ client.on('interactionCreate', async interaction => {
 });
 //! BOT CONNECTION DON'T DELETE
 client.login(process.env.TOKEN)
+

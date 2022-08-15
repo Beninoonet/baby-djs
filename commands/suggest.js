@@ -8,7 +8,7 @@ module.exports = {
     .setDescription('Faites une suggestions.')
     .addStringOption(option =>
         option.setName('texte')
-                .setDescription('écrit ta suggestion ici')
+                .setDescription('écrit ta suggestion ici.')
                 .setRequired(true)),
     /**
      * 
@@ -28,6 +28,6 @@ module.exports = {
         const message = await suggestChannel.send({embeds: [Response], fetchReply: true})
         message.react("✔️")
         message.react("❌")
-        interaction.reply({ content: `Ta suggestion a été publié ici -> **${suggestChannel}**`, ephemeral: true});
+        interaction.reply({ content: `Ta suggestion a été publié ici -> **${suggestChannel}.**`, ephemeral: true});
     }
 }
