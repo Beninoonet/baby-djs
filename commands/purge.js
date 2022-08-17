@@ -1,5 +1,5 @@
-const { SlashCommandBuilder, PermissionFlagsBits, CommandInteraction, EmbedBuilder } = require("discord.js");
-
+const { SlashCommandBuilder, PermissionFlagsBits, WebhookClient, CommandInteraction, EmbedBuilder } = require("discord.js");
+const {logerHookUrl} = require('../config.json')
 module.exports = {
     data: new SlashCommandBuilder()
     .setName('purge')
@@ -13,6 +13,7 @@ module.exports = {
          * @param {CommandInteraction} interaction 
          */
     async execute(interaction) {
+        const Loger = new WebhookClient({url: logerHookUrl });
 
         const message = interaction.options.getInteger('message');
         const target = interaction.options.getUser('target');
@@ -21,7 +22,11 @@ module.exports = {
 
         const Response = new EmbedBuilder()
             .setColor('DarkRed');
-            
+        
+        const Logs = new EmbedBuilder()
+            .setColor('DarkOrange')
+            .setTitle(`${interaction.user.tag} à utilisé ${interaction.commandName}`);
+        
         if(message > 100){
             Response.setDescription('**Tu ne peux pas supprimé plus de 100 messages**');
             interaction.reply({embeds: [Response], ephemeral: true});
@@ -38,6 +43,7 @@ module.exports = {
             const targetmsg = (await Messages).filter((m) => m.author.id === target.id);
             await interaction.channel.bulkDelete(targetmsg, true);
             Response.setDescription(`**Le(s) message(s) de ${target} ont été supprimé**`);
+            Logs.setDescription(`${interaction.user} a supprimé les message de ${target} dans le salon ${interaction.channel}.`)
 
             interaction.reply({embeds: [Response], fetchReply: true})
             setTimeout(() => {
@@ -47,12 +53,14 @@ module.exports = {
         else{
             interaction.channel.bulkDelete(message)
             Response.setDescription(`**${message} message(s) supprimé**`);
+            Logs.setDescription(`${interaction.user} a supprimé ${message} message(s) dans le salon ${interaction.channel}.`)
 
+            
             interaction.reply({embeds: [Response], fetchReply: true})
             setTimeout(() => {
                 interaction.deleteReply()
             }, 5000);
         }
-
+        Loger.send({embeds: [Logs]})
     }
 }

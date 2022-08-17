@@ -7,17 +7,6 @@ const {logerHookUrl} = require('../config.json')
          * @param {CommandInteraction} interaction 
          */
         execute(interaction) {
-            const Loger = new WebhookClient({url: logerHookUrl })
-
-            const Response = new EmbedBuilder()
-                .setColor('DarkAqua')
-                .setTitle(`${interaction.user.tag} a executé une commande`)
-                .setDescription(`Salon: ${interaction.channel} \n Commande: /${interaction.commandName}`)
-                .setThumbnail(interaction.user.avatarURL({dynamic: true}))
-            
-            Loger.send({
-                embeds: [Response]
-            })
-            
+            console.log(`${interaction.user.tag} a utilisé ${interaction.commandName} dans le salon ${interaction.channel}`)
         },
 };
