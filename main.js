@@ -38,6 +38,7 @@ for (const file of eventFiles) {
 
 // ONLY FOR COMMANDS INTERACTION
 //! DON'T DELETE
+
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
