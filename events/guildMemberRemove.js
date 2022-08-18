@@ -9,8 +9,8 @@ const { EmbedBuilder, GuildMember } = require('discord.js');
             const joinEmbed = new EmbedBuilder()
                 .setTitle(`${member.user.tag} a quitté ${member.guild.name}`)
                 .setColor('Red')
-                .setThumbnail(member.avatarURL())
-                .setTimestamp();
+                .setThumbnail(member.displayAvatarURL())
+                .setTimestamp()
             member.guild.channels.cache.get('1009509499788345425').send({embeds: [joinEmbed]})   
         },
 };
