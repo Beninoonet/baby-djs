@@ -5,12 +5,14 @@ const { Client, Collection, GatewayIntentBits } = require('discord.js');
 require("dotenv").config();
 
 
+
+
 const client  = new Client({intents: 
 [
 	GatewayIntentBits.GuildMembers, 
 	GatewayIntentBits.Guilds, 
 	GatewayIntentBits.GuildWebhooks
-] 
+], ws: { properties: { $browser: "Discord iOS" }}
 });
 
 
