@@ -40,7 +40,8 @@ module.exports = {
         const Logs = new EmbedBuilder()
             .setColor('Blue')
             .setTitle(`${interaction.user.tag} à utilisé ${interaction.commandName}`)
-            .setDescription(`Publié dans le salon ${suggestChannel} \n [Messages](${message.url})`);
+            .setDescription(`Publié dans le salon ${suggestChannel} \n [Messages](${message.url})`)
+            .setTimestamp();
         Loger.send({embeds: [Logs]})
 
     }

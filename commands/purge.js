@@ -24,7 +24,7 @@ module.exports = {
             .setColor('DarkRed');
         
         const Logs = new EmbedBuilder()
-            .setColor('DarkOrange');
+            .setColor('DarkOrange').setTimestamp();
         
         if(message > 100){
             Response.setDescription('**Tu ne peux pas supprimé plus de 100 messages**');

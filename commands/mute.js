@@ -15,7 +15,7 @@ module.exports = {
     async execute(interaction) {
         const Loger = new WebhookClient({url: logerHookUrl });
 
-        const Logs = new EmbedBuilder().setColor('Aqua');
+        const Logs = new EmbedBuilder().setColor('Aqua').setTimestamp();
 
         const member = interaction.options.getMember('member');
 
