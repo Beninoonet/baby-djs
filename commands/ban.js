@@ -26,6 +26,10 @@ module.exports = {
         // Init Embed of Bans
         const banEmbed = new EmbedBuilder().setColor('Red').setTimestamp();
         
+        if(interaction.client.user.id === member.id)
+            return interaction.reply({embeds: [new EmbedBuilder().setColor('Red').setDescription(`🔴 Tu ne peux pas bannir ce membre.`)], ephemeral: true})
+
+
         // Block ban an owner of server
         if(member.id === interaction.guild.ownerId)
         return interaction.reply({embeds: [new EmbedBuilder().setColor('Red').setDescription(`🔴 Tu ne peux pas bannir ce membre.`)], ephemeral: true});
@@ -33,11 +37,13 @@ module.exports = {
         if(interaction.user.id === member.id)
         return interaction.reply({embeds: [new EmbedBuilder().setColor('Red').setDescription(`🔴 Tu ne peux pas te bannir toi-même.`)], ephemeral: true});
 
-        banEmbed.setDescription(`**${member} vient d'être banni du serveur !** \nRaison : ${reason}`);
+        banEmbed.setDescription(`**${member} vient d'être banni du serveur ${interaction.guild.name} !** \nRaison : ${reason}`);
         
         Logs.setDescription(`**${member} vient d'être banni du serveur !** par ${interaction.user} \n Raison: ${reason} \n Commandes utilisé dans le salon: ${interaction.channel}`);
         Loger.send({embeds: [Logs]})
         interaction.reply({embeds: [banEmbed]})
+        await member.send({embeds: [banEmbed]})
         await member.ban({reason: reason});
-    }
+
+    }   
 }
