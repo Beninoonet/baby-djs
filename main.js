@@ -1,21 +1,11 @@
 const fs = require('node:fs');
 const path = require('node:path');
 
-const { Client, Collection, GatewayIntentBits } = require('discord.js');
+const { Client, Collection } = require('discord.js');
 require("dotenv").config();
 
 
-
-
-const client  = new Client({intents: 
-[
-	GatewayIntentBits.GuildMembers, 
-	GatewayIntentBits.Guilds, 
-	GatewayIntentBits.GuildWebhooks
-], ws: { properties: { $browser: "Discord iOS" }}
-});
-
-
+const client  = new Client({intents: 1 });
 client.commands = new Collection();
 
 
@@ -30,7 +20,9 @@ for (const file of commandFiles) {
 	// With the key as the command name and the value as the exported module
 	client.commands.set(command.data.name, command);
 }
+
 // *EVENTS HANDLER
+
 const eventsPath = path.join(__dirname, 'events');
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
@@ -46,7 +38,6 @@ for (const file of eventFiles) {
 
 // ONLY FOR COMMANDS INTERACTION
 //! DON'T DELETE
-
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
@@ -63,4 +54,3 @@ client.on('interactionCreate', async interaction => {
 });
 //! BOT CONNECTION DON'T DELETE
 client.login(process.env.TOKEN)
-

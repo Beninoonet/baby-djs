@@ -1,12 +1,11 @@
-const { CommandInteraction, WebhookClient, EmbedBuilder } = require('discord.js');
-const {logerHookUrl} = require('../config.json')
+
     module.exports = {
         name: 'interactionCreate',
         /**
          * 
          * @param {CommandInteraction} interaction 
          */
-        execute(interaction) {
-            console.log(`${interaction.user.tag} a utilisé ${interaction.commandName} dans le salon ${interaction.channel}`)
+        async execute(interaction, client) {
+            console.log(`${interaction.user} use ${interaction.commandName}`)
         },
 };
