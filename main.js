@@ -40,6 +40,7 @@ for (const file of eventFiles) {
 //! DON'T DELETE
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isChatInputCommand()) return;
+	if(!interaction.isUserContextMenuCommand()) return;
 
 	const command = client.commands.get(interaction.commandName);
 
